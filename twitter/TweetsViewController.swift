@@ -12,7 +12,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
 {
 
     @IBOutlet weak var tableView: UITableView!
-    
+ 
+    var refreshControl: UIRefreshControl!
     var tweets: [Tweet]?
     
     override func viewDidLoad() {
@@ -22,6 +23,22 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "fetchTweets", forControlEvents: UIControlEvents.ValueChanged)
+        
+        let dummyTableVC = UITableViewController()
+        dummyTableVC.tableView = tableView
+        dummyTableVC.refreshControl = refreshControl
+        
+        fetchTweets()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func fetchTweets() {
         TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion:
             { (tweets, error) -> () in
                 if let tweets = tweets {
@@ -30,13 +47,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
                 } else {
                     println("empty tweets \(error)")
                 }
+                self.refreshControl.endRefreshing()
             }
         )
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,28 +62,33 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         var cell = tableView.dequeueReusableCellWithIdentifier("TweetsCell", forIndexPath: indexPath) as! TweetsCell
         
         if let tweets = tweets {
-//            if indexPath.row == 0 {
-//                tweets[0].retweeted = true
-//                tweets[0].favorited = true
-//            }
             cell.tweet = tweets[indexPath.row]
-            
         }
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     @IBAction func onSignOut(sender: AnyObject) {
         User.currentUser?.logout()
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        let navigationController = segue.destinationViewController as! UINavigationController
+        let vc = navigationController.topViewController as! DetailsViewController
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPathForCell(cell)!
+        let tweet = self.tweets![indexPath.row]
+        
+        vc.tweet = tweet
+        
     }
-    */
 
 }

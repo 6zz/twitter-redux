@@ -25,7 +25,7 @@ class ViewController: UIViewController {
             if let user = user {
                 self.performSegueWithIdentifier("loginSegue", sender: self)
             } else {
-                println("login failed")
+                println("login failed \(error)")
             }
         }
     }

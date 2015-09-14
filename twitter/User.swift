@@ -18,6 +18,7 @@ class User: NSObject {
     var screenName: String?
     var profileImageUrl: String?
     var tagline: String?
+    var favoritedCount: Int
     var dictionary: NSDictionary?
     
     init(dictionary: NSDictionary) {
@@ -26,6 +27,7 @@ class User: NSObject {
         screenName = dictionary["screen_name"] as? String
         profileImageUrl = dictionary["profile_image_url"] as? String
         tagline = dictionary["description"] as? String
+        favoritedCount = dictionary["favourites_count"] as? Int ?? 0
         
 //        println("name: \(name)")
 //        println("screenName: \(screenName)")
