@@ -17,13 +17,18 @@ class TweetsCell: UITableViewCell {
     @IBOutlet weak var mentionLabel: UILabel!
     @IBOutlet weak var createdAtLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
+    @IBOutlet weak var userRetweetImageView: UIImageView!
+    @IBOutlet weak var favoriteImageView: UIImageView!
     
     var dateFormatter = NSDateFormatter()
     
     var tweet: Tweet! {
         didSet {
+            var user = tweet.user!
+            
             authorImageView.setImageWithURL(NSURL(string: tweet.user!.profileImageUrl!))
-            authorLabel.text = tweet.user!.name
+            authorLabel.text = user.name
+            mentionLabel.text = "@\(user.screenName)"
             
             var hoursAgo = Int(ceil(abs(tweet.createdAt!.timeIntervalSinceNow)/3600))
 
@@ -35,6 +40,13 @@ class TweetsCell: UITableViewCell {
             }
             
             tweetLabel.text = tweet.text!
+            println("retweeted: \(tweet.retweeted); favrited: \(tweet.favorited)")
+            if tweet.retweeted == true {
+                userRetweetImageView.image = UIImage(named: "retweet_on")
+            }
+            if tweet.favorited == true {
+                favoriteImageView.image = UIImage(named: "favorite_on")
+            }
         }
     }
     

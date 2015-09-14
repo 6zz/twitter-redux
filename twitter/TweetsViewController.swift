@@ -49,7 +49,12 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         var cell = tableView.dequeueReusableCellWithIdentifier("TweetsCell", forIndexPath: indexPath) as! TweetsCell
         
         if let tweets = tweets {
+//            if indexPath.row == 0 {
+//                tweets[0].retweeted = true
+//                tweets[0].favorited = true
+//            }
             cell.tweet = tweets[indexPath.row]
+            
         }
         return cell
     }

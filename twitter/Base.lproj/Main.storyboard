@@ -74,25 +74,25 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Wu retweeted" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1I-Ip-oCP">
-                                                    <rect key="frame" x="58" y="6" width="254" height="13.5"/>
+                                                    <rect key="frame" x="58" y="6" width="254" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.50196081399917603" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Michael Moran" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVA-Q6-AV7">
-                                                    <rect key="frame" x="58" y="28" width="77" height="13.5"/>
+                                                    <rect key="frame" x="58" y="28" width="77" height="14"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/14/14" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpH-oN-16P">
-                                                    <rect key="frame" x="272" y="28" width="40" height="13.5"/>
+                                                    <rect key="frame" x="272" y="28" width="40" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I have seen the future of newspaper: " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jid-Tt-blv">
-                                                    <rect key="frame" x="58" y="45" width="254" height="14.5"/>
+                                                    <rect key="frame" x="58" y="45" width="254" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -134,7 +134,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="@Michael Moran" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SzT-iq-GMd">
-                                                    <rect key="frame" x="143" y="28" width="125" height="13.5"/>
+                                                    <rect key="frame" x="143" y="28" width="125" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="110" id="BHY-2e-B50"/>
                                                     </constraints>
@@ -172,10 +172,12 @@
                                             <outlet property="authorImageView" destination="Sms-WO-JEh" id="crg-QM-Tu5"/>
                                             <outlet property="authorLabel" destination="VVA-Q6-AV7" id="7k3-lA-dml"/>
                                             <outlet property="createdAtLabel" destination="cpH-oN-16P" id="D7T-Yn-SHy"/>
+                                            <outlet property="favoriteImageView" destination="zZW-Wp-7PC" id="KDh-if-wLB"/>
                                             <outlet property="mentionLabel" destination="SzT-iq-GMd" id="j93-OV-xm6"/>
                                             <outlet property="retweetImageView" destination="lHm-Ha-7gw" id="hXo-o4-bi7"/>
                                             <outlet property="retweetLabel" destination="f1I-Ip-oCP" id="I7E-mE-ejJ"/>
                                             <outlet property="tweetLabel" destination="Jid-Tt-blv" id="YiP-dl-FfJ"/>
+                                            <outlet property="userRetweetImageView" destination="2OI-FI-FaY" id="Xjx-If-EOg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
