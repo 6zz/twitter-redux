@@ -8,14 +8,14 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposerViewControllerDelegate
 {
 
     @IBOutlet weak var tableView: UITableView!
  
     var refreshControl: UIRefreshControl!
     var tweets: [Tweet]?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,6 +37,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     func fetchTweets() {
         TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion:
@@ -71,6 +73,15 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    func composerViewController(tweeter: ComposerViewController, didTweet tweet: Tweet) {
+        if tweets == nil {
+            tweets = [Tweet]()
+        }
+
+        tweets!.insert(tweet, atIndex: 0)
+        tableView.reloadData()
+    }
+    
     @IBAction func onSignOut(sender: AnyObject) {
         User.currentUser?.logout()
     }
@@ -79,15 +90,38 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         let navigationController = segue.destinationViewController as! UINavigationController
-        let vc = navigationController.topViewController as! DetailsViewController
-        let cell = sender as! UITableViewCell
+        let vc = navigationController.topViewController as UIViewController
+        
+        switch segue.identifier! {
+        case "newTweetSegue":
+            self.prepareForSegueToComposerView(
+                sender as! UIBarButtonItem,
+                viewController: vc as! ComposerViewController)
+        case "detailsSegue":
+            self.prepareForSegueToDetailsView(
+                sender as! UITableViewCell,
+                viewController: vc as! DetailsViewController
+            )
+        default:
+            println("unhandled segue")
+        }
+        
+    }
+    
+    func prepareForSegueToDetailsView(cell: UITableViewCell, viewController: DetailsViewController) {
         let indexPath = tableView.indexPathForCell(cell)!
         let tweet = self.tweets![indexPath.row]
         
-        vc.tweet = tweet
+        viewController.tweet = tweet
+    }
+    
+    func prepareForSegueToComposerView(
+        sender: UIBarButtonItem,
+        viewController: ComposerViewController) {
+        
+        viewController.delegate = self
+        viewController.mode = sender.title!
         
     }
 

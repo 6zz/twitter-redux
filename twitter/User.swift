@@ -24,7 +24,8 @@ class User: NSObject {
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
         name = dictionary["name"] as? String
-        screenName = dictionary["screen_name"] as? String
+        let key = "screen_name"
+        screenName = "@\(dictionary[key] as! String)"
         profileImageUrl = dictionary["profile_image_url"] as? String
         tagline = dictionary["description"] as? String
         favoritedCount = dictionary["favourites_count"] as? Int ?? 0

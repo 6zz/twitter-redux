@@ -28,7 +28,7 @@ class TweetsCell: UITableViewCell {
             
             authorImageView.setImageWithURL(NSURL(string: tweet.user!.profileImageUrl!))
             authorLabel.text = user.name!
-            mentionLabel.text = "@\(user.screenName!)"
+            mentionLabel.text = user.screenName!
             
             var hoursAgo = Int(ceil(abs(tweet.createdAt!.timeIntervalSinceNow)/3600))
 
@@ -54,14 +54,14 @@ class TweetsCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         preferredMaxLayoutWidth()
+        authorImageView.layer.cornerRadius = 5
+        authorImageView.clipsToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-        authorImageView.layer.cornerRadius = 5
-        authorImageView.clipsToBounds = true
     }
     
     override func layoutSubviews() {

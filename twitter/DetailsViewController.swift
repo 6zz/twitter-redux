@@ -29,6 +29,9 @@ class DetailsViewController: UIViewController {
             
             if let user = tweet.user {
                 avatarImageView.setImageWithURL(NSURL(string: user.profileImageUrl!))
+                avatarImageView.layer.cornerRadius = 5
+                avatarImageView.clipsToBounds = true
+                
                 authorLabel.text = user.name!
                 screenNameLabel.text = user.screenName!
                 favoriteCountLabel.text = "\(user.favoritedCount)"
