@@ -19,6 +19,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
+        
         TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion:
             { (tweets, error) -> () in
                 if let tweets = tweets {

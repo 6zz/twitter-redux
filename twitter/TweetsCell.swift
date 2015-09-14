@@ -16,6 +16,7 @@ class TweetsCell: UITableViewCell {
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var mentionLabel: UILabel!
     @IBOutlet weak var createdAtLabel: UILabel!
+    @IBOutlet weak var tweetLabel: UILabel!
     
     var dateFormatter = NSDateFormatter()
     
@@ -29,8 +30,11 @@ class TweetsCell: UITableViewCell {
             if hoursAgo < 24 {
                 createdAtLabel.text = "\(hoursAgo)h"
             } else {
+                dateFormatter.dateFormat = "m/d/y"
                 createdAtLabel.text = dateFormatter.stringFromDate(tweet.createdAt!)
             }
+            
+            tweetLabel.text = tweet.text!
         }
     }
     
@@ -57,6 +61,7 @@ class TweetsCell: UITableViewCell {
     private func preferredMaxLayoutWidth() {
         authorLabel.preferredMaxLayoutWidth = authorLabel.frame.size.width
         mentionLabel.preferredMaxLayoutWidth = mentionLabel.frame.size.width
+        tweetLabel.preferredMaxLayoutWidth = tweetLabel.frame.size.width
     }
 
 }
