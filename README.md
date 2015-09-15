@@ -28,5 +28,5 @@ Time spent: `15h`
 
 ### Walkthrough
 
-![Video Walkthrough](...)
+![Video Walkthrough](hw3wt.gif)
 
