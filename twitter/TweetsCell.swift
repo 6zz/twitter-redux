@@ -11,6 +11,7 @@ import UIKit
 @objc protocol TweetsCellDelegate {
     optional func tweetsCell(cell: TweetsCell, didClickReply mode: String)
     optional func tweetsCell(cell: TweetsCell, didClickRetweet newtweet: Tweet)
+    optional func tweetsCell(cell: TweetsCell, didClickFavorite newtweet: Tweet)
 }
 
 class TweetsCell: UITableViewCell {
@@ -77,14 +78,19 @@ class TweetsCell: UITableViewCell {
         self.preferredMaxLayoutWidth()
     }
     
-    @IBAction func onFavorite(sender: AnyObject) {
-        
+    @IBAction func onFavorite(sender: UIButton) {
+        TwitterClient.sharedInstance.favorWithParams([ "id": self.tweet.statusId ],
+            completion: { (result, error) -> () in
+                self.delegate?.tweetsCell?(self, didClickFavorite: result!)
+                sender.selected = true
+        })
     }
     
     
-    @IBAction func onRetweet(sender: AnyObject) {
+    @IBAction func onRetweet(sender: UIButton) {
         TwitterClient.sharedInstance.retweetWithParams(self.tweet.statusId, params: nil) { (result, error) -> () in
-            delegate?.tweetsCell?(self, didClickRetweet: result!)
+            self.delegate?.tweetsCell?(self, didClickRetweet: result!)
+            sender.selected = true
         }
     }
     

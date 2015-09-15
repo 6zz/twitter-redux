@@ -135,6 +135,7 @@
                                                             <state key="normal" image="retweet">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <state key="selected" image="retweet_on"/>
                                                             <connections>
                                                                 <action selector="onRetweet:" destination="jvx-Ph-E2P" eventType="touchUpInside" id="hp8-kx-Tm8"/>
                                                             </connections>
@@ -150,6 +151,7 @@
                                                             <state key="normal" image="favorite">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <state key="selected" image="favorite_on"/>
                                                             <connections>
                                                                 <action selector="onFavorite:" destination="jvx-Ph-E2P" eventType="touchUpInside" id="d9J-e3-Np1"/>
                                                             </connections>
@@ -605,8 +607,10 @@ ljalfkadjs</string>
     </scenes>
     <resources>
         <image name="favorite" width="16" height="16"/>
+        <image name="favorite_on" width="16" height="16"/>
         <image name="reply" width="16" height="16"/>
         <image name="retweet" width="19" height="16"/>
+        <image name="retweet_on" width="19" height="16"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

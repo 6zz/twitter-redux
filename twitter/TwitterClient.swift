@@ -99,7 +99,24 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             failure: {
                 (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                 
-                println("error updating status: \(error)")
+                println("error retweeting: \(error)")
+            }
+        )
+    }
+    
+    func favorWithParams(params: NSDictionary?, completion: (result: Tweet?, error: NSError?) -> ()) {
+        
+        POST("1.1/favorites/create.json", parameters: params,
+            success: {
+                (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+                
+                var rs = Tweet(dictionary: response as! NSDictionary)
+                completion(result: rs, error: nil)
+            },
+            failure: {
+                (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                
+                println("error favoring: \(error)")
             }
         )
     }
