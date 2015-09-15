@@ -8,6 +8,12 @@
 
 import UIKit
 
+@objc protocol DetailsViewControllerDelegate {
+    optional func detailsViewController(viewController: DetailsViewController, didClickReply mode: String)
+    optional func detailsViewController(viewController: DetailsViewController, didClickRetweet newtweet: Tweet)
+    optional func detailsViewController(viewController: DetailsViewController, didClickFavorite newtweet: Tweet)
+}
+
 class DetailsViewController: UIViewController {
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var authorLabel: UILabel!
@@ -16,10 +22,11 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var createdAtLabel: UILabel!
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favoriteCountLabel: UILabel!
-    @IBOutlet weak var retweetImageView: UIImageView!
-    @IBOutlet weak var favoritedImageView: UIImageView!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favorButton: UIButton!
 
     var tweet: Tweet?
+    weak var delegate: DetailsViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +48,8 @@ class DetailsViewController: UIViewController {
             createdAtLabel.text = tweet.createdAtString
             retweetCountLabel.text = "\(tweet.retweetCount)"
             
-            if tweet.retweeted! == true {
-                retweetImageView.image = UIImage(named: "retweet_on")
-            }
-            if tweet.favorited! == true {
-                favoritedImageView.image = UIImage(named: "favorite_on")
-            }
+            retweetButton.selected = tweet.retweeted!
+            favorButton.selected = tweet.favorited!
         }
     }
 
@@ -59,14 +62,33 @@ class DetailsViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
 
-    /*
+    @IBAction func onFavClicked(sender: UIButton) {
+        TwitterClient.sharedInstance.favorWithParams([ "id": self.tweet!.statusId ],
+            completion: { (result, error) -> () in
+                self.delegate?.detailsViewController?(self, didClickFavorite: result!)
+                sender.selected = true
+        })
+    }
+    
+    @IBAction func onRetweet(sender: UIButton) {
+        TwitterClient.sharedInstance.retweetWithParams(self.tweet!.statusId, params: nil) { (result, error) -> () in
+            self.delegate?.detailsViewController?(self, didClickRetweet: result!)
+            sender.selected = true
+        }
+    }
+    
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        let navigationController = segue.destinationViewController as! UINavigationController
+        let vc = navigationController.topViewController as! ComposerViewController
+        
+        vc.replyToTweet = tweet!
     }
-    */
+
 
 }

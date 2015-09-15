@@ -108,6 +108,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         let tweet = self.tweets![indexPath.row]
         
         viewController.tweet = tweet
+        viewController.delegate = self
     }
     
     func prepareForSegueToComposerView(
@@ -140,6 +141,18 @@ extension TweetsViewController: TweetsCellDelegate {
     }
     
     func tweetsCell(cell: TweetsCell, didClickRetweet newtweet: Tweet) {
+        if tweets == nil {
+            tweets = [Tweet]()
+        }
+        
+        tweets!.insert(newtweet, atIndex: 0)
+        tableView.reloadData()
+    }
+}
+
+
+extension TweetsViewController: DetailsViewControllerDelegate {
+    func detailsViewController(viewController: DetailsViewController, didClickRetweet newtweet: Tweet) {
         if tweets == nil {
             tweets = [Tweet]()
         }
