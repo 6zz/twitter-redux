@@ -135,6 +135,9 @@
                                                             <state key="normal" image="retweet">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="onRetweet:" destination="jvx-Ph-E2P" eventType="touchUpInside" id="hp8-kx-Tm8"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="uMr-Th-qkX">
                                                             <rect key="frame" x="164" y="0.0" width="66" height="22"/>
@@ -147,6 +150,9 @@
                                                             <state key="normal" image="favorite">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="onFavorite:" destination="jvx-Ph-E2P" eventType="touchUpInside" id="d9J-e3-Np1"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -10,6 +10,7 @@ import UIKit
 
 @objc protocol TweetsCellDelegate {
     optional func tweetsCell(cell: TweetsCell, didClickReply mode: String)
+    optional func tweetsCell(cell: TweetsCell, didClickRetweet newtweet: Tweet)
 }
 
 class TweetsCell: UITableViewCell {
@@ -74,6 +75,17 @@ class TweetsCell: UITableViewCell {
         super.layoutSubviews()
         
         self.preferredMaxLayoutWidth()
+    }
+    
+    @IBAction func onFavorite(sender: AnyObject) {
+        
+    }
+    
+    
+    @IBAction func onRetweet(sender: AnyObject) {
+        TwitterClient.sharedInstance.retweetWithParams(self.tweet.statusId, params: nil) { (result, error) -> () in
+            delegate?.tweetsCell?(self, didClickRetweet: result!)
+        }
     }
     
     @IBAction func onReply(sender: AnyObject) {

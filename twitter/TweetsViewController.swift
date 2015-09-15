@@ -138,4 +138,13 @@ extension TweetsViewController: TweetsCellDelegate {
     func tweetsCell(cell: TweetsCell, didClickReply mode: String) {
         performSegueWithIdentifier("newTweetSegue", sender: cell)
     }
+    
+    func tweetsCell(cell: TweetsCell, didClickRetweet newtweet: Tweet) {
+        if tweets == nil {
+            tweets = [Tweet]()
+        }
+        
+        tweets!.insert(newtweet, atIndex: 0)
+        tableView.reloadData()
+    }
 }
