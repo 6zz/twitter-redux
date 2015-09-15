@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ComposerViewControllerDelegate
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
 
     @IBOutlet weak var tableView: UITableView!
@@ -66,21 +66,14 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         if let tweets = tweets {
             cell.tweet = tweets[indexPath.row]
         }
+        cell.delegate = self
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
-    
-    func composerViewController(tweeter: ComposerViewController, didTweet tweet: Tweet) {
-        if tweets == nil {
-            tweets = [Tweet]()
-        }
 
-        tweets!.insert(tweet, atIndex: 0)
-        tableView.reloadData()
-    }
     
     @IBAction func onSignOut(sender: AnyObject) {
         User.currentUser?.logout()
@@ -96,8 +89,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         switch segue.identifier! {
         case "newTweetSegue":
             self.prepareForSegueToComposerView(
-                sender as! UIBarButtonItem,
-                viewController: vc as! ComposerViewController)
+                sender,
+                viewController: vc as! ComposerViewController
+            )
         case "detailsSegue":
             self.prepareForSegueToDetailsView(
                 sender as! UITableViewCell,
@@ -117,12 +111,31 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func prepareForSegueToComposerView(
-        sender: UIBarButtonItem,
-        viewController: ComposerViewController) {
-        
-        viewController.delegate = self
-        viewController.mode = sender.title!
-        
+        sender: AnyObject?,
+        viewController: ComposerViewController
+        ) {
+            viewController.delegate = self
+            viewController.replyToTweet = sender?.tweet
     }
+    
 
+
+}
+
+extension TweetsViewController: ComposerViewControllerDelegate {
+    
+    func composerViewController(tweeter: ComposerViewController, didTweet tweet: Tweet) {
+        if tweets == nil {
+            tweets = [Tweet]()
+        }
+        
+        tweets!.insert(tweet, atIndex: 0)
+        tableView.reloadData()
+    }
+}
+
+extension TweetsViewController: TweetsCellDelegate {
+    func tweetsCell(cell: TweetsCell, didClickReply mode: String) {
+        performSegueWithIdentifier("newTweetSegue", sender: cell)
+    }
 }

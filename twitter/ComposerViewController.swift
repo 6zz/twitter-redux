@@ -21,7 +21,7 @@ class ComposerViewController: UIViewController {
     @IBOutlet weak var tweetTextView: UITextView!
     
     weak var delegate: ComposerViewControllerDelegate?
-    var mode = ""
+    var replyToTweet: Tweet?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +29,7 @@ class ComposerViewController: UIViewController {
         var user = User.currentUser!
         
         // Do any additional setup after loading the view.
-        self.tweetButtonItem.title = "140 Tweet"
-        println("mode: \(mode)")
+//        self.tweetButtonItem.title = "140 Tweet"
         avatarImageView.setImageWithURL(NSURL(string: user.profileImageUrl!))
         avatarImageView.layer.cornerRadius = 5
         avatarImageView.clipsToBounds = true
@@ -38,6 +37,9 @@ class ComposerViewController: UIViewController {
         nameLabel.text = user.name!
         screenNameLabel.text = user.screenName!
         tweetTextView.text = ""
+        if let replyToTweet = replyToTweet {
+            tweetTextView.text = "\(replyToTweet.user!.screenName!) "
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,12 +52,15 @@ class ComposerViewController: UIViewController {
     }
 
     @IBAction func onTweet(sender: AnyObject) {
+        var params = [ "status": tweetTextView.text ]
         
-        println("\(tweetTextView.text)")
+        if let replyToTweet = replyToTweet {
+            params["in_reply_to_status_id"] = replyToTweet.statusId
+        }
         
-        TwitterClient.sharedInstance.tweetWithParams([
-                "status": tweetTextView.text
-            ], completion: { (tweet, error) -> () in
+        TwitterClient.sharedInstance.tweetWithParams(
+            params,
+            completion: { (tweet, error) -> () in
                 self.delegate?.composerViewController?(self, didTweet: tweet!)
         })
         

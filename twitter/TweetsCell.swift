@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol TweetsCellDelegate {
+    optional func tweetsCell(cell: TweetsCell, didClickReply mode: String)
+}
+
 class TweetsCell: UITableViewCell {
 
     @IBOutlet weak var authorImageView: UIImageView!
@@ -17,10 +21,12 @@ class TweetsCell: UITableViewCell {
     @IBOutlet weak var mentionLabel: UILabel!
     @IBOutlet weak var createdAtLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
-    @IBOutlet weak var userRetweetImageView: UIImageView!
-    @IBOutlet weak var favoriteImageView: UIImageView!
+    @IBOutlet weak var retweetButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
+    
     
     var dateFormatter = NSDateFormatter()
+    weak var delegate: TweetsCellDelegate?
     
     var tweet: Tweet! {
         didSet {
@@ -42,10 +48,10 @@ class TweetsCell: UITableViewCell {
             tweetLabel.text = tweet.text!
             println("retweeted: \(tweet.retweeted!); favrited: \(tweet.favorited!)")
             if tweet.retweeted! == true {
-                userRetweetImageView.image = UIImage(named: "retweet_on")
+                retweetButton.setImage(UIImage(named: "retweet_on"), forState: UIControlState.Normal)
             }
             if tweet.favorited! == true {
-                favoriteImageView.image = UIImage(named: "favorite_on")
+                favoriteButton.setImage(UIImage(named: "favorite_on"), forState: UIControlState.Normal)
             }
         }
     }
@@ -68,6 +74,10 @@ class TweetsCell: UITableViewCell {
         super.layoutSubviews()
         
         self.preferredMaxLayoutWidth()
+    }
+    
+    @IBAction func onReply(sender: AnyObject) {
+        delegate?.tweetsCell?(self, didClickReply: "reply")
     }
     
     private func preferredMaxLayoutWidth() {
