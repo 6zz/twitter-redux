@@ -13,9 +13,9 @@ class MenuViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    private var greenNavigationController: UIViewController!
-    private var blueNavigationController: UIViewController!
-    private var pinkNavigationController: UIViewController!
+    private var loginNavigationController: UIViewController!
+    private var tweetsNavigationController: UIViewController!
+//    private var pinkNavigationController: UIViewController!
     
     var viewControllers: [UIViewController] = []
     
@@ -24,19 +24,23 @@ class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        greenNavigationController = storyboard.instantiateViewControllerWithIdentifier("GreenNavigationController")
-        blueNavigationController = storyboard.instantiateViewControllerWithIdentifier("BlueNavigationController")
-        pinkNavigationController = storyboard.instantiateViewControllerWithIdentifier("PinkNavigationController")
+        loginNavigationController = storyboard.instantiateViewControllerWithIdentifier("LoginNavigationController")
+        tweetsNavigationController = storyboard.instantiateViewControllerWithIdentifier("TweetsNavController")
+        //pinkNavigationController = storyboard.instantiateViewControllerWithIdentifier("PinkNavigationController")
         
-        viewControllers.append(greenNavigationController)
-        viewControllers.append(blueNavigationController)
-        viewControllers.append(pinkNavigationController)
+        viewControllers.append(loginNavigationController)
+        viewControllers.append(tweetsNavigationController)
+//        viewControllers.append(pinkNavigationController)
         
-        hamburgerViewController?.contentViewController = greenNavigationController
+        if User.currentUser != nil {
+            print("current user detected")
+            let vc: UIViewController = storyboard.instantiateViewControllerWithIdentifier("TweetsNavController") as! UINavigationController
+            
+            hamburgerViewController?.contentViewController = vc
+        } else {
+            hamburgerViewController?.contentViewController = loginNavigationController
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -59,15 +63,16 @@ class MenuViewController: UIViewController {
 
 extension MenuViewController: UITableViewDataSource {
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath) as! MenuCell
-        
-        let titles = ["Green", "Blue", "Pink"]
-        cell.menuTitleLabel.text = titles[indexPath.row]
         
         return cell
     }

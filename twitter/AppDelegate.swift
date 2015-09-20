@@ -20,12 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupHamburgerViewController()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
-        
-        if User.currentUser != nil {
-            print("current user detected")
-            let vc: UIViewController = storyboard.instantiateViewControllerWithIdentifier("TweetsNavController") as! UINavigationController
-            window?.rootViewController = vc
-        }
+
         return true
     }
     
