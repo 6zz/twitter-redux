@@ -20,6 +20,7 @@ class MenuViewController: UIViewController {
     var viewControllers: [UIViewController] = []
     
     var hamburgerViewController: HamburgerViewController?
+    var links = ["Time Line", "Mentions"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,13 +69,24 @@ extension MenuViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        if section == 0 {
+            return 1
+        } else {
+            return 2
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath) as! MenuCell
+        let section = indexPath.section
         
-        return cell
+        if section == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("MenuProfileCell") as! MenuProfileCell
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath) as! MenuCell
+            cell.setLink(links[indexPath.row])
+            return cell
+        }
     }
 }
 
@@ -83,6 +95,12 @@ extension MenuViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        hamburgerViewController?.contentViewController = viewControllers[indexPath.row]
+        let section = indexPath.section
+        
+        if section == 0 {
+            NSLog("show profile")
+        } else {
+            hamburgerViewController?.contentViewController = viewControllers[indexPath.row]
+        }
     }
 }

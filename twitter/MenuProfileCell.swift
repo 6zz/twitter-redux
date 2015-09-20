@@ -1,5 +1,5 @@
 //
-//  MenuCell.swift
+//  MenuProfileCell.swift
 //  twitter
 //
 //  Created by Shawn Zhu on 9/20/15.
@@ -8,8 +8,10 @@
 
 import UIKit
 
-class MenuCell: UITableViewCell {
-    @IBOutlet weak var linkLabel: UILabel!
+class MenuProfileCell: UITableViewCell {
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var userLabel: UILabel!
+    @IBOutlet weak var userDescriptionLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,10 +24,4 @@ class MenuCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-}
-
-extension MenuCell {
-    func setLink(name: String) {
-        linkLabel.text = name
-    }
 }

@@ -57,11 +57,9 @@ class HamburgerViewController: UIViewController {
         let velocity = sender.velocityInView(view)
         
         if sender.state == UIGestureRecognizerState.Began {
-            NSLog("pan began")
             initialLeftMargin = leftConstraint.constant
         } else if sender.state == UIGestureRecognizerState.Changed {
             let newX = initialLeftMargin + translation.x
-            NSLog("pan changed \(newX)")
             
             if newX > 0 {
                 leftConstraint.constant = newX
