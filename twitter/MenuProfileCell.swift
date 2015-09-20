@@ -13,6 +13,14 @@ class MenuProfileCell: UITableViewCell {
     @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var userDescriptionLabel: UILabel!
 
+    var user: User! {
+        didSet {
+            profileImageView.setImageWithURL(NSURL(string: user.profileImageUrl!))
+            userLabel.text = user.name!
+            userDescriptionLabel.text = user.tagline!
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

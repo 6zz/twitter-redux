@@ -81,6 +81,7 @@ extension MenuViewController: UITableViewDataSource {
         
         if section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("MenuProfileCell") as! MenuProfileCell
+            cell.user = User.currentUser
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath) as! MenuCell
