@@ -32,13 +32,13 @@ class TweetsCell: UITableViewCell {
     
     var tweet: Tweet! {
         didSet {
-            var user = tweet.user!
+            let user = tweet.user!
             
             authorImageView.setImageWithURL(NSURL(string: tweet.user!.profileImageUrl!))
             authorLabel.text = user.name!
             mentionLabel.text = user.screenName!
             
-            var hoursAgo = Int(ceil(abs(tweet.createdAt!.timeIntervalSinceNow)/3600))
+            let hoursAgo = Int(ceil(abs(tweet.createdAt!.timeIntervalSinceNow)/3600))
 
             if hoursAgo < 24 {
                 createdAtLabel.text = "\(hoursAgo)h"
@@ -48,7 +48,7 @@ class TweetsCell: UITableViewCell {
             }
             
             tweetLabel.text = tweet.text!
-            println("retweeted: \(tweet.retweeted!); favrited: \(tweet.favorited!)")
+            print("retweeted: \(tweet.retweeted!); favrited: \(tweet.favorited!)")
             if tweet.retweeted! == true {
                 retweetButton.setImage(UIImage(named: "retweet_on"), forState: UIControlState.Normal)
             }

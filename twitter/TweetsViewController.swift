@@ -47,7 +47,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
                     self.tweets = tweets
                     self.tableView.reloadData()
                 } else {
-                    println("empty tweets \(error)")
+                    print("empty tweets \(error)")
                 }
                 self.refreshControl.endRefreshing()
             }
@@ -61,7 +61,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("TweetsCell", forIndexPath: indexPath) as! TweetsCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("TweetsCell", forIndexPath: indexPath) as! TweetsCell
         
         if let tweets = tweets {
             cell.tweet = tweets[indexPath.row]
@@ -84,7 +84,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let navigationController = segue.destinationViewController as! UINavigationController
-        let vc = navigationController.topViewController as UIViewController
+        let vc = navigationController.topViewController! as UIViewController
         
         switch segue.identifier! {
         case "newTweetSegue":
@@ -98,7 +98,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
                 viewController: vc as! DetailsViewController
             )
         default:
-            println("unhandled segue")
+            print("unhandled segue")
         }
         
     }

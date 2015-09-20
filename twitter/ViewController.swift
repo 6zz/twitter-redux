@@ -22,10 +22,10 @@ class ViewController: UIViewController {
 
     @IBAction func onLogin(sender: AnyObject) {
         TwitterClient.sharedInstance.loginWithCompletion { (user: User?, error: NSError?) -> () in
-            if let user = user {
+            if let _ = user {
                 self.performSegueWithIdentifier("loginSegue", sender: self)
             } else {
-                println("login failed \(error)")
+                print("login failed \(error)")
             }
         }
     }

@@ -26,7 +26,7 @@ class Tweet: NSObject {
         statusId = dictionary["id_str"] as! String
         id = dictionary["id"] as! Int
         
-        var formatter = NSDateFormatter()
+        let formatter = NSDateFormatter()
         formatter.dateFormat = "EEE MMM d HH:mm:ss Zy"
         createdAt = formatter.dateFromString(createdAtString!)
         

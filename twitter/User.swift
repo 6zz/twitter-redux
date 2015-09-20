@@ -46,10 +46,10 @@ class User: NSObject {
     class var currentUser: User? {
         get {
             if _currentUser == nil {
-                var data = NSUserDefaults.standardUserDefaults().objectForKey(currentUserKey) as? NSData
+                let data = NSUserDefaults.standardUserDefaults().objectForKey(currentUserKey) as? NSData
         
                 if let data = data {
-                    var dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as! NSDictionary
+                    let dictionary = (try! NSJSONSerialization.JSONObjectWithData(data, options: [])) as! NSDictionary
         
                     _currentUser = User(dictionary: dictionary)
                 }
@@ -60,7 +60,7 @@ class User: NSObject {
         
         set (user) {
             if let _currentUser = user {
-                var data = NSJSONSerialization.dataWithJSONObject(_currentUser.dictionary!, options: nil, error: nil)
+                let data = try? NSJSONSerialization.dataWithJSONObject(_currentUser.dictionary!, options: [])
                 
                 NSUserDefaults.standardUserDefaults().setObject(data, forKey: currentUserKey)
             } else {

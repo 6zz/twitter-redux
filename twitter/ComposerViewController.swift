@@ -26,7 +26,7 @@ class ComposerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var user = User.currentUser!
+        let user = User.currentUser!
         
         // Do any additional setup after loading the view.
 //        self.tweetButtonItem.title = "140 Tweet"

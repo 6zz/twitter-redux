@@ -39,14 +39,14 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             scope: nil,
             success: {
                 (requestToken: BDBOAuth1Credential!) -> Void in
-                println("got request token")
-                var authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
+                print("got request token")
+                let authURL = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")
                 
                 UIApplication.sharedApplication().openURL(authURL!)
             },
             failure: {
                 (error: NSError!) -> Void in
-                println("failed to get token")
+                print("failed to get token")
             }
         )
     }
@@ -57,7 +57,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             success: {
                 (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
                 
-                var tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
+                let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
                 
                 completion(tweets: tweets, error: nil)
             },
@@ -76,13 +76,13 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             success: {
                 (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
                 
-                var rs = Tweet(dictionary: response as! NSDictionary)
+                let rs = Tweet(dictionary: response as! NSDictionary)
                 completion(result: rs, error: nil)
             },
             failure: {
                 (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                 
-                println("error updating status: \(error)")
+                print("error updating status: \(error)")
             }
         )
     }
@@ -93,13 +93,13 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             success: {
                 (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
                 
-                var rs = Tweet(dictionary: response as! NSDictionary)
+                let rs = Tweet(dictionary: response as! NSDictionary)
                 completion(result: rs, error: nil)
             },
             failure: {
                 (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                 
-                println("error retweeting: \(error)")
+                print("error retweeting: \(error)")
             }
         )
     }
@@ -110,13 +110,13 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             success: {
                 (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
                 
-                var rs = Tweet(dictionary: response as! NSDictionary)
+                let rs = Tweet(dictionary: response as! NSDictionary)
                 completion(result: rs, error: nil)
             },
             failure: {
                 (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
                 
-                println("error favoring: \(error)")
+                print("error favoring: \(error)")
             }
         )
     }
@@ -127,20 +127,20 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             method: "POST",
             requestToken: BDBOAuth1Credential(queryString: url.query),
             success: { (accessToken: BDBOAuth1Credential!) -> Void in
-                println("got access token!")
+                print("got access token!")
                 TwitterClient.sharedInstance.requestSerializer.saveAccessToken(accessToken)
                 
                 TwitterClient.sharedInstance.GET("1.1/account/verify_credentials.json", parameters: nil,
                     success: {
                         (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-                        var user = User(dictionary: response as! NSDictionary)
+                        let user = User(dictionary: response as! NSDictionary)
                         User.currentUser = user
-                        println("user: \(user.name!)")
+                        print("user: \(user.name!)")
                         self.loginCompletion?(user: user, error: nil)
                     },
                     failure: {
                         (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-                        println("error getting current user")
+                        print("error getting current user")
                         self.loginCompletion?(user: nil, error: error)
                     }
                 )
@@ -148,7 +148,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 
             },
             failure: { (error: NSError!) -> Void in
-                println("failed to receive access token \(error)")
+                print("failed to receive access token \(error)")
             }
         )
     }

@@ -17,19 +17,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        setupHamburgerViewController()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
         
         if User.currentUser != nil {
-            println("current user detected")
-            var vc: UIViewController = storyboard.instantiateViewControllerWithIdentifier("TweetsNavController") as! UINavigationController
+            print("current user detected")
+            let vc: UIViewController = storyboard.instantiateViewControllerWithIdentifier("TweetsNavController") as! UINavigationController
             window?.rootViewController = vc
         }
         return true
     }
     
     func userDidLogout() {
-        var vc: UIViewController = storyboard.instantiateInitialViewController() as! UIViewController
+        let vc: UIViewController = storyboard.instantiateInitialViewController() as UIViewController!
         window?.rootViewController = vc
     }
 
@@ -55,11 +56,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         
         TwitterClient.sharedInstance.openURL(url)
         
         return true
+    }
+    
+    private func setupHamburgerViewController() {
+        let hamburgerViewController = window?.rootViewController as! HamburgerViewController
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+        menuViewController.hamburgerViewController = hamburgerViewController
+        
+        hamburgerViewController.menuViewController = menuViewController
     }
 
 }
