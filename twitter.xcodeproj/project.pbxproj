@@ -24,6 +24,7 @@
 		29BBC3731BA67235004E2A18 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BBC3721BA67235004E2A18 /* DetailsViewController.swift */; };
 		29BBC3751BA695CC004E2A18 /* ComposerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BBC3741BA695CC004E2A18 /* ComposerViewController.swift */; };
 		29CC612E1BA7E9CF0096B86E /* TweetsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CC612D1BA7E9CF0096B86E /* TweetsCell.swift */; };
+		29F582571BB0505B00D0AA08 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F582561BB0505B00D0AA08 /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		3C9008E1CEC9C804DA7404A7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 014E7CF3C17F5F82D8795E18 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		29BBC3721BA67235004E2A18 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		29BBC3741BA695CC004E2A18 /* ComposerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposerViewController.swift; sourceTree = "<group>"; };
 		29CC612D1BA7E9CF0096B86E /* TweetsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsCell.swift; sourceTree = "<group>"; };
+		29F582561BB0505B00D0AA08 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		44244441605760FB61F382F7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,6 +174,7 @@
 				294220421BA548C90000A22B /* TweetsViewController.swift */,
 				297081DD1BAE3AE80002520A /* HamburgerViewController.swift */,
 				297081DF1BAE52E60002520A /* MenuViewController.swift */,
+				29F582561BB0505B00D0AA08 /* ProfileViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				294220411BA539990000A22B /* Tweet.swift in Sources */,
 				29AA10EB1BAF40AE00E5F939 /* MenuCell.swift in Sources */,
 				29BBC3751BA695CC004E2A18 /* ComposerViewController.swift in Sources */,
+				29F582571BB0505B00D0AA08 /* ProfileViewController.swift in Sources */,
 				29BBC3731BA67235004E2A18 /* DetailsViewController.swift in Sources */,
 				297081E01BAE52E60002520A /* MenuViewController.swift in Sources */,
 				294220431BA548C90000A22B /* TweetsViewController.swift in Sources */,

@@ -19,6 +19,9 @@ class User: NSObject {
     var profileImageUrl: String?
     var tagline: String?
     var favoritedCount: Int
+    var followersCount: Int
+    var followingsCount: Int
+    var tweetsCount: Int
     var dictionary: NSDictionary?
     
     init(dictionary: NSDictionary) {
@@ -26,14 +29,12 @@ class User: NSObject {
         name = dictionary["name"] as? String
         let key = "screen_name"
         screenName = "@\(dictionary[key] as! String)"
-        profileImageUrl = dictionary["profile_image_url"] as? String
+        profileImageUrl = dictionary["profile_image_url_https"] as? String
         tagline = dictionary["description"] as? String
         favoritedCount = dictionary["favourites_count"] as? Int ?? 0
-        
-//        println("name: \(name)")
-//        println("screenName: \(screenName)")
-//        println("profileImageUrl: \(profileImageUrl)")
-//        println("tagline: \(tagline)")
+        followersCount = dictionary["followers_count"] as? Int ?? 0
+        followingsCount = dictionary[""] as? Int ?? 0
+        tweetsCount = dictionary["statuses_count"] as? Int ?? 0
     }
     
     func logout() {
