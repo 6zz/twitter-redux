@@ -30,4 +30,4 @@ Time spent: `17h`
 
 ### Walkthrough
 
-![Video Walkthrough](https://raw.githubusercontent.com/mvinceable/twitter/master/demo.gif)
+![Video Walkthrough](hw4wt.gif)
