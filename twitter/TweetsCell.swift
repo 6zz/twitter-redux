@@ -12,11 +12,13 @@ import UIKit
     optional func tweetsCell(cell: TweetsCell, didClickReply mode: String)
     optional func tweetsCell(cell: TweetsCell, didClickRetweet newtweet: Tweet)
     optional func tweetsCell(cell: TweetsCell, didClickFavorite newtweet: Tweet)
+    optional func tweetsCell(cell: TweetsCell, didClickAuthorImage author: User)
 }
 
 class TweetsCell: UITableViewCell {
 
-    @IBOutlet weak var authorImageView: UIImageView!
+
+    @IBOutlet weak var authorImageButton: UIButton!
     @IBOutlet weak var retweetImageView: UIImageView!
     @IBOutlet weak var retweetLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
@@ -34,7 +36,7 @@ class TweetsCell: UITableViewCell {
         didSet {
             let user = tweet.user!
             
-            authorImageView.setImageWithURL(NSURL(string: tweet.user!.profileImageUrl!))
+            authorImageButton.setImage(UIImage(data: NSData(contentsOfURL: NSURL(string: tweet.user!.profileImageUrl!)!)!), forState: UIControlState.Normal)
             authorLabel.text = user.name!
             mentionLabel.text = user.screenName!
             
@@ -62,8 +64,8 @@ class TweetsCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         preferredMaxLayoutWidth()
-        authorImageView.layer.cornerRadius = 5
-        authorImageView.clipsToBounds = true
+        authorImageButton.layer.cornerRadius = 5
+        authorImageButton.clipsToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -99,6 +101,9 @@ class TweetsCell: UITableViewCell {
     }
     
     
+    @IBAction func onAuthorImageTouch(sender: AnyObject) {
+        delegate?.tweetsCell?(self, didClickAuthorImage: tweet.user!)
+    }
     
     private func preferredMaxLayoutWidth() {
         authorLabel.preferredMaxLayoutWidth = authorLabel.frame.size.width

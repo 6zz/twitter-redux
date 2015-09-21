@@ -36,6 +36,10 @@ class MenuViewController: UIViewController {
         viewControllers.append(tweetsNavigationController)
         viewControllers.append(mentionsNavigationController)
         
+        let tweetsViewController = (tweetsNavigationController as! UINavigationController).topViewController as! TweetsViewController
+        
+        tweetsViewController.hamburgerViewController = hamburgerViewController
+        tweetsViewController.profileNavigationController = profileNavigationController as? UINavigationController
         if User.currentUser != nil {
             print("current user detected")
             let vc: UIViewController = storyboard.instantiateViewControllerWithIdentifier("TweetsNavController") as! UINavigationController

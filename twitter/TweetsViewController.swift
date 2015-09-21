@@ -13,6 +13,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var tableView: UITableView!
  
+    var hamburgerViewController: HamburgerViewController?
+    var profileNavigationController: UINavigationController?
     var refreshControl: UIRefreshControl!
     var tweets: [Tweet]?
 
@@ -99,6 +101,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
                 sender as! UITableViewCell,
                 viewController: vc as! DetailsViewController
             )
+        case "profileSegue":
+            let profileViewController = vc as! ProfileViewController
+            profileViewController.user = sender as! User
         default:
             print("unhandled segue")
         }
@@ -149,6 +154,13 @@ extension TweetsViewController: TweetsCellDelegate {
         
         tweets!.insert(newtweet, atIndex: 0)
         tableView.reloadData()
+    }
+    
+    func tweetsCell(cell: TweetsCell, didClickAuthorImage author: User) {
+        let profileViewController = profileNavigationController?.topViewController as! ProfileViewController
+        
+        profileViewController.user = author
+        hamburgerViewController?.contentViewController = profileNavigationController
     }
 }
 
