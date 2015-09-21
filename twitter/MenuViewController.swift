@@ -14,6 +14,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var loginNavigationController: UIViewController!
+    private var profileNavigationController: UIViewController!
     private var tweetsNavigationController: UIViewController!
 //    private var pinkNavigationController: UIViewController!
     
@@ -27,11 +28,13 @@ class MenuViewController: UIViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         loginNavigationController = storyboard.instantiateViewControllerWithIdentifier("LoginNavigationController")
+        profileNavigationController = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationController")
         tweetsNavigationController = storyboard.instantiateViewControllerWithIdentifier("TweetsNavController")
         //pinkNavigationController = storyboard.instantiateViewControllerWithIdentifier("PinkNavigationController")
         
-        viewControllers.append(loginNavigationController)
+        viewControllers.append(profileNavigationController)
         viewControllers.append(tweetsNavigationController)
+        
 //        viewControllers.append(pinkNavigationController)
         
         if User.currentUser != nil {
@@ -94,14 +97,18 @@ extension MenuViewController: UITableViewDataSource {
 extension MenuViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let section = indexPath.section
         
         if section == 0 {
-            NSLog("show profile")
+            let profileNavigationController = viewControllers[indexPath.row] as! UINavigationController
+            let profileViewController = profileNavigationController.topViewController as! ProfileViewController
+
+            profileViewController.user = User.currentUser!
+            hamburgerViewController?.contentViewController = profileNavigationController
         } else {
-            hamburgerViewController?.contentViewController = viewControllers[indexPath.row]
+            hamburgerViewController?.contentViewController = viewControllers[indexPath.row+1]
         }
     }
 }

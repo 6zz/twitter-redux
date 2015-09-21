@@ -9,6 +9,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
@@ -19,6 +20,8 @@ class ProfileViewController: UIViewController {
     
     var user: User! {
         didSet {
+            view.layoutIfNeeded()
+
             profileImageView.setImageWithURL(NSURL(string: user.profileImageUrl!))
             nameLabel.text = user.name!
             screenNameLabel.text = user.screenName!

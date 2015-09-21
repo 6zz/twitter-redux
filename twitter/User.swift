@@ -33,7 +33,7 @@ class User: NSObject {
         tagline = dictionary["description"] as? String
         favoritedCount = dictionary["favourites_count"] as? Int ?? 0
         followersCount = dictionary["followers_count"] as? Int ?? 0
-        followingsCount = dictionary[""] as? Int ?? 0
+        followingsCount = dictionary["friends_count"] as? Int ?? 0
         tweetsCount = dictionary["statuses_count"] as? Int ?? 0
     }
     

@@ -689,7 +689,7 @@ ljalfkadjs</string>
                                     <constraint firstAttribute="trailing" secondItem="7AR-ai-aVm" secondAttribute="trailing" id="tBB-MX-pGv"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oqR-a1-TbF" customClass="Profil">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oqR-a1-TbF">
                                 <rect key="frame" x="8" y="178" width="304" height="382"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="14" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMg-VJ-dG0">
@@ -767,7 +767,7 @@ ljalfkadjs</string>
                         <outlet property="followersLabel" destination="JvD-fz-hHK" id="ncZ-0a-zB7"/>
                         <outlet property="followingsLabel" destination="SMg-VJ-dG0" id="EhK-5V-K2Y"/>
                         <outlet property="nameLabel" destination="VU1-5z-hGQ" id="psK-VW-leG"/>
-                        <outlet property="profileImageView" destination="Wcd-Lp-CTx" id="Ldg-sL-iFK"/>
+                        <outlet property="profileImageView" destination="Wcd-Lp-CTx" id="2aA-hF-r2I"/>
                         <outlet property="screenNameLabel" destination="Hls-4a-dff" id="ZSd-VO-AhQ"/>
                         <outlet property="taglineLabel" destination="7AR-ai-aVm" id="xcN-TE-M1F"/>
                         <outlet property="tweetsLabel" destination="CZU-n0-1Ao" id="S98-3y-JSp"/>
