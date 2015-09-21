@@ -16,7 +16,7 @@ class MenuViewController: UIViewController {
     private var loginNavigationController: UIViewController!
     private var profileNavigationController: UIViewController!
     private var tweetsNavigationController: UIViewController!
-//    private var pinkNavigationController: UIViewController!
+    private var mentionsNavigationController: UIViewController!
     
     var viewControllers: [UIViewController] = []
     
@@ -30,12 +30,11 @@ class MenuViewController: UIViewController {
         loginNavigationController = storyboard.instantiateViewControllerWithIdentifier("LoginNavigationController")
         profileNavigationController = storyboard.instantiateViewControllerWithIdentifier("ProfileNavigationController")
         tweetsNavigationController = storyboard.instantiateViewControllerWithIdentifier("TweetsNavController")
-        //pinkNavigationController = storyboard.instantiateViewControllerWithIdentifier("PinkNavigationController")
+        mentionsNavigationController = storyboard.instantiateViewControllerWithIdentifier("MentionsNavigationController")
         
         viewControllers.append(profileNavigationController)
         viewControllers.append(tweetsNavigationController)
-        
-//        viewControllers.append(pinkNavigationController)
+        viewControllers.append(mentionsNavigationController)
         
         if User.currentUser != nil {
             print("current user detected")

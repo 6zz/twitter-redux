@@ -98,6 +98,8 @@ class TweetsCell: UITableViewCell {
         delegate?.tweetsCell?(self, didClickReply: "reply")
     }
     
+    
+    
     private func preferredMaxLayoutWidth() {
         authorLabel.preferredMaxLayoutWidth = authorLabel.frame.size.width
         mentionLabel.preferredMaxLayoutWidth = mentionLabel.frame.size.width
